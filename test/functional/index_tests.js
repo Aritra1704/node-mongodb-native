@@ -271,6 +271,8 @@ describe('Indexes', function() {
   });
 
   /**
+   * TODO: This test is non-deterministic, and I don't think it is doing
+   * what it thinks it is doing. The try-catch statement does nothing.
    * @ignore
    */
   it('shouldThrowErrorOnAttemptingSafeCreateIndexWithNoCallback', {
@@ -302,6 +304,8 @@ describe('Indexes', function() {
   });
 
   /**
+   * TODO: This test is non-deterministic, and I don't think it is doing
+   * what it thinks it is doing. The try-catch statement does nothing.
    * @ignore
    */
   it('shouldThrowErrorOnAttemptingSafeEnsureIndexWithNoCallback', {

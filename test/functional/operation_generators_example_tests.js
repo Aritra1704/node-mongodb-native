@@ -1844,17 +1844,15 @@ describe('Operation (Generators)', function() {
         // BEGIN
         var collection = db.collection('simple_document_insert_collection_no_safe_with_generators');
         // Insert a single document
-        collection.insertOne({ hello: 'world_no_safe' });
+        yield collection.insertOne({ hello: 'world_no_safe' });
 
         // Wait for a second before finishing up, to ensure we have written the item to disk
-        setTimeout(function() {
-          return co(function*() {
-            // Fetch the document
-            var item = yield collection.findOne({ hello: 'world_no_safe' });
-            test.equal('world_no_safe', item.hello);
-            client.close();
-          });
-        }, 100);
+        return co(function*() {
+          // Fetch the document
+          var item = yield collection.findOne({ hello: 'world_no_safe' });
+          test.equal('world_no_safe', item.hello);
+          client.close();
+        });
       });
       // END
     }
@@ -2477,17 +2475,15 @@ describe('Operation (Generators)', function() {
         // Fetch the collection
         var collection = db.collection('save_a_simple_document_with_generators');
         // Save a document with no safe option
-        collection.save({ hello: 'world' });
+        yield collection.save({ hello: 'world' });
 
         // Wait for a second
-        setTimeout(function() {
-          return co(function*() {
-            // Find the saved document
-            var item = yield collection.findOne({ hello: 'world' });
-            test.equal('world', item.hello);
-            client.close();
-          });
-        }, 2000);
+        return co(function*() {
+          // Find the saved document
+          var item = yield collection.findOne({ hello: 'world' });
+          test.equal('world', item && item.hello);
+          client.close();
+        });
       });
       // END
     }
